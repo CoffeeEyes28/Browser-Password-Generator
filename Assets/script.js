@@ -1,12 +1,12 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-// var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-// Special Array
+
+// Special character array
 var specialChar = [ "!", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", "/", "<", ">", "?", "@", "^", "_", "`", "{", "|", "}", "~" ]
 
+// object contating all random character generator functions
 var random = {
   lowerCase: lettersLower,
   upperCase: lettersUpper,
@@ -15,7 +15,8 @@ var random = {
 };
 
 
-// Random Generators 
+
+// Random character Generators 
 function lettersLower(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
@@ -33,41 +34,33 @@ function randomSpecial(){
 }
 
 
-
-// var options = [letters, numbers, special] 
-
-// var random = Math.floor(Math.random() * options.length);
-
-
-// var type = ["lowercase", "uppercase", "numbers", "special"]
-
-
-// second function var with empty array, check if obj exists if not null then if statements which have statement conditions and end with for loop 
-
 // Function generatepassword 
 
 function generatePassword(){
 
-
+// length prompt
    var length = prompt("How many characters?")
 
+  //  if canceled/nothing entered function will end
    if (length == "null" || length == null || length == ""){
     return;
   }
 
+  // low limit
     if (length <=7) {
       alert("Character length must be at least 8!")
 
       return null;
    }
    
-
+// high limit
    if (length > 128){
     alert("Character length must not exceed 128!")
 
     return null;
    }
 
+  //  must be a numeric entry 
   if (isNaN(+ length)) {
   alert("Input must be a number!")
   
@@ -114,6 +107,7 @@ else {
   special === false 
 }
 
+// obj contating prompt data
 choices = {
   length: length,
   lowerCase: lowerCase,
@@ -123,36 +117,45 @@ choices = {
  };
 
 
-
+// number of types
 var count = lowerCase + upperCase + numbers + special;
 
+// if no on all prompts end function
 if(count === 0){
   return null;
 }
 
+// filter for obj, discards any false
  var objCheck = [{lowerCase}, {upperCase}, {numbers}, {special}].filter
  (item => Object.values(item)[0]);
 
 
+//  empty string for password to generate
 generate = '';
 
+// loops through obj keys 
 for (var i = 0; i < length; i += count){
 objCheck.forEach(type => {
 var finalPass = Object.keys(type)[0];
 
+
+// produces string using for loop and random generator functions
 generate += random[finalPass]();
 
 });
 
 }
 
+// forces generate to only print what length was
 var fullyGenerated = generate.slice(0, length);
 
+
+// prints fully generated password
 return fullyGenerated;
 
  }
 
-
+ 
 
 
 
