@@ -1,14 +1,37 @@
 // Assignment Code
-
-
-
 var generateBtn = document.querySelector("#generate");
 
-var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-var special = [ "!", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", "/", "<", ">", "?", "@", "^", "_", "`", "{", "|", "}", "~" ]
+// var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+// var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-var finalPass = [];
+// Special Array
+var specialChar = [ "!", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", "/", "<", ">", "?", "@", "^", "_", "`", "{", "|", "}", "~" ]
+
+var random = {
+  lowerCase: lettersLower,
+  upperCase: lettersUpper,
+  numbers: randomNumber,
+  special: randomSpecial
+};
+
+
+// Random Generators 
+function lettersLower(){
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+}
+
+function lettersUpper(){
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+}
+
+function randomNumber(){
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+
+function randomSpecial(){
+  return specialChar[Math.floor(Math.random() * specialChar.length)];
+}
+
 
 
 // var options = [letters, numbers, special] 
@@ -21,9 +44,11 @@ var finalPass = [];
 
 // second function var with empty array, check if obj exists if not null then if statements which have statement conditions and end with for loop 
 
-// Functions
+// Function generatepassword 
 
 function generatePassword(){
+
+
    var length = prompt("How many characters?")
 
    if (length == "null" || length == null || length == ""){
@@ -56,7 +81,7 @@ else{
 
 var lowerCase = confirm("Would you like lowercase letters?")
 if (lowerCase === true){
-  lowerCase === true
+ lowerCase === lowerCase
 }
  else {
   lowerCase === false 
@@ -98,17 +123,36 @@ choices = {
  };
 
 
- var final = function(){
-  finalPass.push(choices)
+
+var count = lowerCase + upperCase + numbers + special;
+
+if(count === 0){
+  return null;
+}
+
+ var objCheck = [{lowerCase}, {upperCase}, {numbers}, {special}].filter
+ (item => Object.values(item)[0]);
+
+
+generate = '';
+
+for (var i = 0; i < length; i += count){
+objCheck.forEach(type => {
+var finalPass = Object.keys(type)[0];
+
+generate += random[finalPass]();
+
+});
+
+}
+
+var fullyGenerated = generate.slice(0, length);
+
+return fullyGenerated;
 
  }
 
- final();
-   
-   
-  //  console.log(finalPass)
-console.log(choices)
-  }
+
 
 
 
